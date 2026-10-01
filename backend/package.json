@@ -1,7 +1,21 @@
 {
+  "name": "levantamento-de-requisitos-backend",
+  "version": "1.0.0",
+  "description": "Backend da plataforma de levantamento de requisitos",
+  "type": "module",
+  "main": "src/app.ts",
+  "scripts": {
+    "dev": "tsx watch src/app.ts",
+    "build": "tsc",
+    "start": "node dist/app.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  },
   "devDependencies": {
-    "@types/express": "^5.0.6",
-    "@types/node": "^26.6.3",
-    "tsx": "^4.23.15"
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.0.0"
   }
 }
