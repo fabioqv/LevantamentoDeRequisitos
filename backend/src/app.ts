@@ -1,8 +1,14 @@
 import express from "express";
 
+interface Project {
+    id: number;
+    name: string;
+    description: string;
+}
 
 
 const app = express(); 
+const projects: Project[] = [];
 
 app.use(express.json()); 
 
@@ -15,8 +21,36 @@ app.post("/projects", (req, res) =>{
     
     const { name, description } = req.body; 
     
-    res.json({ name, description }); 
+    if(!name || !description){
+
+        res.status(400).json({
+
+            error: "Nome e descrição são obrigatórios"
+
+        });
+
+        return;
+    }
+
+    const project = {
+        
+        id: projects.length + 1,
+        name,
+        description
+
+    };
+
+    projects.push(project);
+
+    res.status(201).json(project);
+
 }); 
+
+
+app.get("/projects", (req, res)=>{
+    res.json(projects);
+
+});
 
 app.listen(3000, () =>{ 
 
