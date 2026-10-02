@@ -1,9 +1,7 @@
 import { Router } from "express";
-import type { Project } from "../types/project.js";
+import { createProject, getProjects } from "../services/projectService.js";
 
 const router = Router();
-
-const projects: Project[] = [];
 
 router.post("/", ( req, res)=>{
     const { name, description }= req.body;
@@ -15,18 +13,14 @@ router.post("/", ( req, res)=>{
         return;
     }
 
-    const project: Project = {
-        id: projects.length + 1,
-        name,
-        description
-    };
-
-    projects.push(project);
+    const project = createProject(name, description);
     res.status(201).json(project);
 
 });
 
 router.get("/", (req, res)=>{
+    const projects = getProjects();
+
     res.json(projects);
 });
 
