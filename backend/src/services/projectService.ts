@@ -1,19 +1,22 @@
+import {
+    createProject as createProjectRepository,
+    getProjects as getProjectsRepository
+} from "../repositories/projectRepository.js";
+
 import type { Project } from "../types/project.js";
 
-const projects : Project[] = [];
+export async function createProject(
+    name: string, 
+    description: string
 
-export function createProject(name: string, description: string): Project{
+): Promise<Project> {
 
-    const project: Project = {
-        id: projects.length + 1,
+    return createProjectRepository({
         name,
         description
-    };
-    projects.push(project);
-    return project;
-
+    });
 }
 
-export function getProjects(): Project[] {
-    return projects;
+export async function getProjects(): Promise<Project[]> {
+    return getProjectsRepository();
 }

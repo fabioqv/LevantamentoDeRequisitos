@@ -1,9 +1,10 @@
 import { Router } from "express";
+
 import { createProject, getProjects } from "../services/projectService.js";
 
 const router = Router();
 
-router.post("/", ( req, res)=>{
+router.post("/", async ( req, res)=>{
     const { name, description }= req.body;
 
     if(!name || !description){
@@ -13,13 +14,13 @@ router.post("/", ( req, res)=>{
         return;
     }
 
-    const project = createProject(name, description);
+    const project = await createProject(name, description);
     res.status(201).json(project);
 
 });
 
-router.get("/", (req, res)=>{
-    const projects = getProjects();
+router.get("/", async (req, res)=>{
+    const projects = await getProjects();
 
     res.json(projects);
 });

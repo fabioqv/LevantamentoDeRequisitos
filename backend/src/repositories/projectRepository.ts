@@ -11,7 +11,7 @@ export async function createProject(
 ): Promise<Project> {
 
     const result = await pool.query(
-        `gi
+        `
         INSERT INTO projects (name, description)
         VALUES ($1, $2)
         RETURNING id, name, description
@@ -32,5 +32,5 @@ export async function getProjects(): Promise<Project[]> {
         `
     );
 
-    return result.rowns;
+    return result.rows;
 }
